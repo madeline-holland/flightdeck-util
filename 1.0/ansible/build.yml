@@ -1,0 +1,65 @@
+---
+- hosts: flight-deck-util
+  tasks:
+    - name: Create a temp directory to store files needed by the run
+      tempfile:
+        state: directory
+        prefix: "ansible-deploy-"
+      register: _run_temp_dir
+      notify:
+        - clear caches
+    - name: Do base configuration
+      include_role:
+        name: "ten7.flightdeck_base"
+    - name: Install needed software
+      apk:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - "libcap"
+        - "zlib"
+        - "git"
+        - "patch"
+        - "curl"
+        - "mariadb-client"
+        - "rsync"
+        - "openssh-client"
+      notify:
+        - clear caches
+    - name: Install the additional packages from pip
+      pip:
+        name:
+          - "passlib"
+          - "PyMySQL"
+          - "jmespath"
+          - "openshift"
+        extra_args: "--ignore-installed --no-cache-dir"
+    - name: Get the stable version of Kubectl
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
+        dest: "{{ _run_temp_dir.path }}/stable.txt"
+    - name: Download kubectl
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/{{ lookup('file', _run_temp_dir.path + '/stable.txt' )}}/bin/linux/amd64/kubectl"
+        dest: "/bin/kubectl"
+        owner: "root"
+        group: "util"
+        mode: "u=rwx,g=rx,o="
+
+  handlers:
+    - name: uninstall build deps
+      shell: >
+        apk del flightdeck-build
+    - name: clear caches
+      shell: >
+        rm -rf {{ item }}
+      args:
+        warn: no
+      loop:
+        - "/tmp/*"
+        - "/var/cache/apk/*"
+        - "/var/www/.composer/cache"
+        - "/var/www/.npm/_cacache"
+        - "/root/.ansible/tmp"
+        - "/root/.cache"

@@ -1,0 +1,13 @@
+---
+flighdeck_motd_name: util 1.0
+
+flightdeck_groups:
+  - name: "util"
+
+flightdeck_users:
+  - name: "util"
+    group: "util"
+    home: "/var/www"
+
+flightdeck_root_prompt: '\u@flight-deck-util:\w# '
+flightdeck_user_prompt: '\u@flight-deck-util:\w$ '
