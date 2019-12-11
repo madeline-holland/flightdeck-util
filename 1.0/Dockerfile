@@ -1,6 +1,10 @@
 FROM alpine:3.10
 MAINTAINER tess@ten7.com
 
+# Override some Ansible defaults.
+ENV ANSIBLE_ROLES_PATH /ansible/roles
+ENV ANSIBLE_NOCOWS 1
+
 # Update the package list and install Ansible.
 RUN apk -U upgrade &&\
     apk add --update --no-cache ansible && \
