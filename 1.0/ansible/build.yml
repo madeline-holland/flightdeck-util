@@ -17,6 +17,8 @@
         state: present
         update_cache: yes
       loop:
+        - "bash"
+        - "ca-certificates"
         - "libcap"
         - "zlib"
         - "git"
@@ -25,6 +27,7 @@
         - "mariadb-client"
         - "rsync"
         - "openssh-client"
+        - "tar"
       notify:
         - clear caches
     - name: Install the additional packages from pip
@@ -46,6 +49,26 @@
         owner: "root"
         group: "util"
         mode: "u=rwx,g=rx,o="
+    - name: Download helm
+      get_url:
+        url: "https://get.helm.sh/helm-v3.1.0-rc.1-linux-amd64.tar.gz"
+        dest: "{{ _run_temp_dir.path }}/helm.tar.gz"
+        owner: "root"
+        group: "util"
+        mode: "u=rwx,g=rx,o="
+    - name: Expand helm archive
+      unarchive:
+        remote_src: no
+        src: "{{ _run_temp_dir.path }}/helm.tar.gz"
+        dest: "{{ _run_temp_dir.path }}/"
+        creates: "{{ _run_temp_dir.path }}/linux-amd64/helm"
+    - name: Install helm command
+      copy:
+        src: "{{ _run_temp_dir.path }}/linux-amd64/helm"
+        dest: "/usr/local/bin/helm"
+        owner: "root"
+        group: "util"
+        mode: "u=rx,g=rx,o="
 
   handlers:
     - name: uninstall build deps
