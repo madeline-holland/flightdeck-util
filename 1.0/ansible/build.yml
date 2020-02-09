@@ -30,6 +30,15 @@
         - "tar"
       notify:
         - clear caches
+    - name: Install build dependencies in a virtual package
+      shell: >
+        apk --no-cache \
+            --virtual flightdeck-build \
+             add python3-dev \
+                 linux-headers \
+                 g++
+      notify:
+        - uninstall build deps
     - name: Install the additional packages from pip
       pip:
         name:
@@ -37,6 +46,8 @@
           - "PyMySQL"
           - "jmespath"
           - "openshift"
+          - "grpcio"
+          - "pyhelm"
         extra_args: "--ignore-installed --no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
