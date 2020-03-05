@@ -21,7 +21,7 @@ COPY ansible /ansible
 
 # Run the build.
 RUN ansible-galaxy install -fr /ansible/requirements.yml && \
-    ansible-playbook -i /ansible/inventories/all.ini /ansible/build.yml -vvvv
+    ansible-playbook -i /ansible/inventories/all.ini /ansible/build.yml
 
 # Switch to the service account.
 USER util

@@ -28,6 +28,7 @@
         - "rsync"
         - "openssh-client"
         - "tar"
+        - "yarn"
       notify:
         - clear caches
     - name: Install build dependencies in a virtual package
@@ -46,8 +47,6 @@
           - "PyMySQL"
           - "jmespath"
           - "openshift"
-          - "grpcio"
-          - "pyhelm"
         extra_args: "--ignore-installed --no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
@@ -80,6 +79,12 @@
         owner: "root"
         group: "util"
         mode: "u=rx,g=rx,o="
+    - name: Set node global packages to install as user-local
+      shell: >
+        yarn config set prefix '/var/www/.npm-global'
+      become: yes
+      become_user: "util"
+      become_method: "su"
 
   handlers:
     - name: uninstall build deps
