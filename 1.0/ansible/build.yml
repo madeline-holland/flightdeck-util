@@ -28,18 +28,8 @@
         - "rsync"
         - "openssh-client"
         - "tar"
-        - "yarn"
       notify:
         - clear caches
-    - name: Install build dependencies in a virtual package
-      shell: >
-        apk --no-cache \
-            --virtual flightdeck-build \
-             add python3-dev \
-                 linux-headers \
-                 g++
-      notify:
-        - uninstall build deps
     - name: Install the additional packages from pip
       pip:
         name:
@@ -79,12 +69,6 @@
         owner: "root"
         group: "util"
         mode: "u=rx,g=rx,o="
-    - name: Set node global packages to install as user-local
-      shell: >
-        yarn config set prefix '/var/www/.npm-global'
-      become: yes
-      become_user: "util"
-      become_method: "su"
 
   handlers:
     - name: uninstall build deps
