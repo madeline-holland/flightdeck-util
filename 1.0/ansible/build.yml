@@ -28,13 +28,15 @@
         - "rsync"
         - "openssh-client"
         - "tar"
+        - "py3-mysqlclient"
+        - "py3-pip"
+        - "py3-setuptools"
       notify:
         - clear caches
     - name: Install the additional packages from pip
       pip:
         name:
           - "passlib"
-          - "PyMySQL"
           - "jmespath"
           - "openshift"
         extra_args: "--ignore-installed --no-cache-dir"
