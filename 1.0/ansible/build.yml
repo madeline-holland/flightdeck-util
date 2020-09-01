@@ -50,8 +50,8 @@
           - "PyMySQL"
           - "jmespath"
           - "openshift"
-          - "grpcio"
-          - "pyhelm"
+          # - "grpcio"
+          # - "pyhelm"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
