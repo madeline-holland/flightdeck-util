@@ -1,5 +1,5 @@
 ---
-- hosts: flight-deck-util
+- hosts: flight_deck_util
   tasks:
     - name: Create a temp directory to store files needed by the run
       tempfile:
@@ -28,18 +28,30 @@
         - "rsync"
         - "openssh-client"
         - "tar"
-        - "py3-mysqlclient"
-        - "py3-pip"
-        - "py3-setuptools"
       notify:
         - clear caches
+    - name: Install build dependencies in a virtual package
+      shell: >
+        apk --no-cache \
+            --virtual flightdeck-build \
+             add py3-pip \
+                 py3-setuptools \
+                 python3-dev \
+                 py3-setuptools \
+                 linux-headers \
+                 g++
+      notify:
+        - uninstall build deps
     - name: Install the additional packages from pip
       pip:
         name:
           - "passlib"
+          - "PyMySQL"
           - "jmespath"
           - "openshift"
-        extra_args: "--ignore-installed --no-cache-dir"
+          - "grpcio"
+          - "pyhelm"
+        extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
         url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
