@@ -27,6 +27,12 @@
         - "mariadb-client"
         - "rsync"
         - "openssh-client"
+        - "python3"
+        - "py3-urllib3"
+        - "py3-mysqlclient"
+        - "py3-jmespath"
+        - "py3-certifi"
+        - "py3-requests"
         - "tar"
       notify:
         - clear caches
@@ -46,11 +52,9 @@
       pip:
         name:
           - "passlib"
-          - "PyMySQL"
-          - "jmespath"
           - "openshift"
-          - "grpcio"
-          - "pyhelm"
+          # - "grpcio"
+          # - "pyhelm"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
