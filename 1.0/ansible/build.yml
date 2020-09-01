@@ -27,6 +27,12 @@
         - "mariadb-client"
         - "rsync"
         - "openssh-client"
+        - "python3"
+        - "py3-urllib3"
+        - "py3-mysqlclient"
+        - "py3-jmespath"
+        - "py3-certifi"
+        - "py3-requests"
         - "tar"
       notify:
         - clear caches
@@ -46,9 +52,6 @@
       pip:
         name:
           - "passlib"
-          - "urllib3"
-          - "PyMySQL"
-          - "jmespath"
           - "openshift"
           # - "grpcio"
           # - "pyhelm"

@@ -23,9 +23,6 @@ COPY ansible /ansible
 RUN ansible-galaxy install -fr /ansible/requirements.yml && \
     ansible-playbook -i /ansible/inventories/all.ini /ansible/build.yml
 
-# Fix problem with openshift importing urllib3 when urllib is already installed.
-RUN ln -s /usr/lib/python3.8/urllib/ /usr/lib/python3.8/urllib3
-
 # Switch to the service account.
 USER util
 
