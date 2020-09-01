@@ -3,6 +3,6 @@
 - src: ten7.digitalocean
 - src: ten7.digitalocean_kubeconfig
 - src: ten7.flightdeck_cluster
-- src: ten7.drupal-backup
-- src: ten7.drupal-deploy
+- src: ten7.drupal_backup
+- src: ten7.drupal_deploy
 - src: ten7.tractorbeam

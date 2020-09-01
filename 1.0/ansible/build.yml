@@ -1,5 +1,5 @@
 ---
-- hosts: flight-deck-util
+- hosts: flight_deck_util
   tasks:
     - name: Create a temp directory to store files needed by the run
       tempfile:
@@ -34,7 +34,10 @@
       shell: >
         apk --no-cache \
             --virtual flightdeck-build \
-             add python3-dev \
+             add py3-pip \
+                 py3-setuptools \
+                 python3-dev \
+                 py3-setuptools \
                  linux-headers \
                  g++
       notify:
@@ -48,7 +51,7 @@
           - "openshift"
           - "grpcio"
           - "pyhelm"
-        extra_args: "--ignore-installed --no-cache-dir"
+        extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
         url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
