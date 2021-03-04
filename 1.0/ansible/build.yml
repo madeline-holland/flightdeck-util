@@ -52,9 +52,7 @@
       pip:
         name:
           - "passlib"
-          - "openshift"
-          # - "grpcio"
-          # - "pyhelm"
+          - "openshift==0.11.0"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
