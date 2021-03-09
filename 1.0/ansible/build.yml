@@ -52,9 +52,7 @@
       pip:
         name:
           - "passlib"
-          - "openshift"
-          # - "grpcio"
-          # - "pyhelm"
+          - "openshift==0.11.0"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
@@ -84,6 +82,26 @@
       copy:
         src: "{{ _run_temp_dir.path }}/linux-amd64/helm"
         dest: "/usr/local/bin/helm"
+        owner: "root"
+        group: "util"
+        mode: "u=rx,g=rx,o="
+    - name: Download Velero
+      get_url:
+        url: "https://github.com/vmware-tanzu/velero/releases/download/v1.5.3/velero-v1.5.3-linux-amd64.tar.gz"
+        dest: "{{ _run_temp_dir.path }}/velero.tar.gz"
+        owner: "root"
+        group: "util"
+        mode: "u=rwx,g=rx,o="
+    - name: Expand Velero archive
+      unarchive:
+        remote_src: no
+        src: "{{ _run_temp_dir.path }}/velero.tar.gz"
+        dest: "{{ _run_temp_dir.path }}/"
+        creates: "{{ _run_temp_dir.path }}/velero-v1.5.3-linux-amd64/velero"
+    - name: Install velero command
+      copy:
+        src: "{{ _run_temp_dir.path }}/velero-v1.5.3-linux-amd64/velero"
+        dest: "/usr/local/bin/velero"
         owner: "root"
         group: "util"
         mode: "u=rx,g=rx,o="
