@@ -3,7 +3,7 @@
 - src: ten7.digitalocean
 - src: ten7.digitalocean_kubeconfig
 - src: ten7.digitalocean_domain
-  version: 1.0.2
+  version: 1.0.3
 - src: ten7.flightdeck_cluster
   version: 1.2.12
 - src: ten7.drupal_backup
