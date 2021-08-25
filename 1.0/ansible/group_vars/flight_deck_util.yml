@@ -9,5 +9,5 @@ flightdeck_users:
     group: "util"
     home: "/var/www"
 
-flightdeck_root_prompt: '\u@flight-deck-util:\w# '
-flightdeck_user_prompt: '\u@flight-deck-util:\w$ '
+flightdeck_root_prompt: '\u@flightdeck-util:\w# '
+flightdeck_user_prompt: '\u@flightdeck-util:\w$ '
