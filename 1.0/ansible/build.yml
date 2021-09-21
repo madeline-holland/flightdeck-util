@@ -26,6 +26,7 @@
         - "curl"
         - "mariadb-client"
         - "rsync"
+        - "rclone"
         - "openssh-client"
         - "python3"
         - "py3-urllib3"
@@ -53,6 +54,7 @@
         name:
           - "passlib"
           - "openshift==0.11.0"
+          - "s3cmd"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
