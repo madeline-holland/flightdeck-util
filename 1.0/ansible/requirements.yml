@@ -8,4 +8,4 @@
 - src: ten7.flightdeck_cluster
   version: 1.4.3
 - src: ten7.tugboat_repo
-  version: 1.0.0
+  version: 1.0.1
