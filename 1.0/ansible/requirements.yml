@@ -1,4 +1,5 @@
 ---
+roles:
 - src: ten7.flightdeck_base
   version: 5.1.3
 - src: ten7.digitalocean
@@ -6,6 +7,8 @@
 - src: ten7.digitalocean_domain
   version: 1.1.0
 - src: ten7.flightdeck_cluster
-  version: 1.4.3
+  version: 1.4.4
 - src: ten7.tugboat_repo
   version: 1.0.1
+collections:
+  - name: community.kubernetes
