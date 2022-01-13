@@ -7,7 +7,7 @@ roles:
 - src: ten7.digitalocean_domain
   version: 1.1.0
 - src: ten7.flightdeck_cluster
-  version: 1.4.4
+  version: 1.4.5
 - src: ten7.tugboat_repo
   version: 1.0.1
 collections:
