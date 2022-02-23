@@ -10,8 +10,6 @@ RUN apk -U upgrade &&\
     apk add --update --no-cache ansible && \
     rm -rf /tmp/* \
            /var/cache/apk/* \
-           /usr/lib/python3.6/site-packages/ansible/modules/network/ \
-           /usr/lib/python3.6/site-packages/ansible/modules/cloud/ \
            /usr/lib/python3.6/site-packages/ansible/modules/windows/
 
 # Copy the Ansible configuration files
