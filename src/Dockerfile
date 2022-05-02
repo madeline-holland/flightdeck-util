@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.15
 MAINTAINER tess@ten7.com
 
 # Override some Ansible defaults.
@@ -7,10 +7,9 @@ ENV ANSIBLE_NOCOWS 1
 
 # Update the package list and install Ansible.
 RUN apk -U upgrade &&\
-    apk add --update --no-cache ansible && \
+    apk add --update --no-cache ansible-core && \
     rm -rf /tmp/* \
-           /var/cache/apk/* \
-           /usr/lib/python3.6/site-packages/ansible/modules/windows/
+           /var/cache/apk/*
 
 # Copy the Ansible configuration files
 COPY ansible-hosts /etc/ansible/hosts
