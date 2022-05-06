@@ -56,7 +56,7 @@
       pip:
         name:
           - "passlib"
-          - "openshift==0.11.0"
+          - "kubernetes"
         extra_args: "--no-cache-dir"
     - name: Get the stable version of Kubectl
       get_url:
